@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Section from "../../components/Section.astro";
+import Blogpost from "../../components/Blogpost.astro";
+export async function getTags() {
+    const allPosts = await Astro.glob("../posts/*.md")
+    const allTags = new Set();
+    allPosts.forEach( post => post.frontmatter.tags.forEach(tag=>{ allTags.add(tag) }) )
+    return Array.from(allTags)
+}
+const tagsList = await getTags();
+---
+<BaseLayout pageTitle="Tags Index">
+    <Section class="bg-gray-200">
+        <div class="mx-auto mt-24 flex w-11/12 flex-wrap justify-center gap-8 md:w-8/12 lg:w-6/12">
+            { tagsList.map( tag => <a href={`../tags/${tag}`}><div class="rounded-full border-4 border-solid border-gray-600 p-8 text-4xl">{tag}</div></a>)}
+        </div>
+    </Section>
+</BaseLayout>

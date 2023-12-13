@@ -1,0 +1,45 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+import Section from "../components/Section.astro";
+const { frontmatter } = Astro.props;
+---
+<style lang="scss" is:global>
+    .post-content {
+        p {
+            color:white;
+            line-height: 2;
+        }
+        ol {
+            padding: 1rem 2rem;
+        }
+        ol li p {
+            line-height: 1.5;
+            strong {
+                color: rgb(244, 223, 184);
+            }
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+    }
+</style>
+
+<BaseLayout pageTitle={frontmatter.title}>
+    <Section className="bg-stone-800 text-stone-300">
+        <h1 class="mb-4 text-4xl">{frontmatter.title}</h1>
+        <p class="text-md mb-1 font-bold">{frontmatter.pubDate.slice(0, 10)}</p>
+        <p class="text-md mb-1 font-bold">Written by: {frontmatter.author}</p>
+        <p class="text-md mb-4 font-light text-orange-200">{frontmatter.description}</p>
+        <img
+            src={frontmatter.image.url}
+            width="300"
+            alt={frontmatter.image.alt}
+            class="my-4"
+        />
+        <div class="post-content">
+            <slot />
+        </div>
+    </Section>
+</BaseLayout>
+

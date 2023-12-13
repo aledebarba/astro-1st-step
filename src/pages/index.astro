@@ -1,22 +1,21 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import Greetings from "../components/Greetings.jsx";
 ---
-
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<nav>
-			<a href="/">Home</a>
-			<a href="/about/">About</a>
-			<a href="/blog/">Blog</a>
-		</nav>
-		<h1>Astro</h1>
-		<h1>My Astro Site</h1>
-	</body>
-</html>
+<BaseLayout pageTitle="Home">
+	<Section className="bg-zinc-100">
+		<h1 class="text-6xl">Astro blog example</h1>
+		<Greetings
+			client:load
+			messages={[
+				"Hello there!",
+				"Welcome!",
+				"Thanks for checking out!",
+				"Howdy!",
+				"Hi",
+			]}
+		/>
+		<h2 class="text-2xl">Following the turorial but not that straight</h2>
+	</Section>
+</BaseLayout>

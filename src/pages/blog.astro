@@ -1,22 +1,30 @@
 ---
-
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Section from "../components/Section.astro";
+import Blogpost from "../components/Blogpost.astro"
+const allPosts = await Astro.glob('./posts/*.md');
+const allPostsByDate = allPosts.sort((a, b) => {
+  return a.frontmatter.pubDate < b.frontmatter.pubDate ? 1 : -1;
+});
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>About</title>
-	</head>
-	<body>
-		<nav>
-			<a href="/">Home</a>
-			<a href="/about/">About</a>
-			<a href="/blog/">Blog</a>
-		</nav>
-		<h1>Blog</h1>
-		<h1>This is the main blog page</h1>
-	</body>
-</html>
+<BaseLayout pageTitle="About">
+    <Section class="bg-store-100">
+        <h1 class="text-6xl">My Astro Learning Blog</h1>
+        <p>This is where I will post about my journey learning Astro.</p>
+        <ul class="mt-4 flex flex-col gap-2">
+            { allPostsByDate.map( post => <li>
+              <Blogpost
+                title={post.frontmatter.title}
+                url={post.url} date={post.frontmatter.date}
+                desc={post.frontmatter.description}
+                image={post.frontmatter.image.url}
+                alt={post.frontmatter.image.alt}
+                date={post.frontmatter.pubDate}
+                tags={post.frontmatter.tags}
+                />
+            </li>)
+             }
+        </ul>
+    </Section>
+</BaseLayout>
