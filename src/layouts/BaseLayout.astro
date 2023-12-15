@@ -1,21 +1,29 @@
 ---
+import { ViewTransitions } from "astro:transitions";
+import { fade } from "astro:transitions";
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import '../global.css';
 const { pageTitle } = Astro.props;
+
 ---
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <title>{pageTitle}</title>
+    <ViewTransitions />
   </head>
   <body>
-    <Navigation />
-    <h1>{ pageTitle ? pageTitle : "Wellcome"}</h1>
-    <slot />
-    <Footer />
+    <main class="pt-20" transition:animate={fade({ duration: "1s"})}>
+      <Navigation/>
+      <slot/>
+      <Footer />
+    </main>
   </body>
 </html>

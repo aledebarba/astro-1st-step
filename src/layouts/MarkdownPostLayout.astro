@@ -3,10 +3,64 @@ import BaseLayout from "./BaseLayout.astro";
 import Section from "../components/Section.astro";
 const { frontmatter } = Astro.props;
 ---
+
+<BaseLayout pageTitle={frontmatter.title}>
+    <Section>
+        <div class="underlayer">
+            <picture>
+                <img
+                    src={frontmatter.image.url}
+                    alt={frontmatter.image.alt}
+                    class="my-4"
+                    transition:name={frontmatter.url}
+                />
+            </picture>
+        </div>
+
+        <div class="overlayer flex h-[50vh] w-fit flex-col rounded-lg border border-solid border-white bg-orange-500/75 p-8 backdrop-blur-sm md:max-w-[40vw]">
+            <h1 class="mb-4 text-4xl md:text-6xl lg:text-8xl">{frontmatter.title}</h1>
+            <p class="text-md mb-1 font-bold">{frontmatter.pubDate.slice(0, 10)}</p>
+            <p class="text-md mb-1 font-bold">Written by: {frontmatter.author}</p>
+            <p class="text-md mb-4 font-light">{frontmatter.description}</p>
+        </div>
+
+        <div class="post-content mt-10 w-full md:w-1/2">
+            <slot />
+        </div>
+    </Section>
+
+</BaseLayout>
+
+
 <style lang="scss" is:global>
+    .underlayer {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 50vh;
+        background-image: linear-gradient(180deg, rgb(34, 72, 132) 0%, rgb(228, 128, 47) 100%);
+        display: grid;
+        place-content: center;
+        overflow: hidden;
+
+        picture img {
+            width: 100vw;
+            height: auto;
+            object-fit: cover;
+            object-position: center bottom;
+            margin: auto;
+        }
+    }
+
+    .overlayer {
+        position: relative;
+        z-index: 2;
+    }
+
     .post-content {
         p {
-            color:white;
+            color:var(--theme-primary-color);
             line-height: 2;
         }
         ol {
@@ -15,7 +69,7 @@ const { frontmatter } = Astro.props;
         ol li p {
             line-height: 1.5;
             strong {
-                color: rgb(244, 223, 184);
+                color:var(--theme-accent-color);
             }
         }
 
@@ -24,22 +78,3 @@ const { frontmatter } = Astro.props;
         }
     }
 </style>
-
-<BaseLayout pageTitle={frontmatter.title}>
-    <Section className="bg-stone-800 text-stone-300">
-        <h1 class="mb-4 text-4xl">{frontmatter.title}</h1>
-        <p class="text-md mb-1 font-bold">{frontmatter.pubDate.slice(0, 10)}</p>
-        <p class="text-md mb-1 font-bold">Written by: {frontmatter.author}</p>
-        <p class="text-md mb-4 font-light text-orange-200">{frontmatter.description}</p>
-        <img
-            src={frontmatter.image.url}
-            width="300"
-            alt={frontmatter.image.alt}
-            class="my-4"
-        />
-        <div class="post-content">
-            <slot />
-        </div>
-    </Section>
-</BaseLayout>
-

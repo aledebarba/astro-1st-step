@@ -7,10 +7,9 @@ const allPostsByDate = allPosts.sort((a, b) => {
   return a.frontmatter.pubDate < b.frontmatter.pubDate ? 1 : -1;
 });
 ---
-
-<BaseLayout pageTitle="About">
-    <Section class="bg-store-100">
-        <h1 class="text-6xl">My Astro Learning Blog</h1>
+<BaseLayout pageTitle="Blog">
+  <h2 class="text-6xl" transition:animate="slide" transition:name="maintitle">My Astro Learning Blog</h2>
+    <Section>
         <p>This is where I will post about my journey learning Astro.</p>
         <ul class="mt-4 flex flex-col gap-2">
             { allPostsByDate.map( post => <li>

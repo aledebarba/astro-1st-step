@@ -4,8 +4,8 @@ import Section from "../components/Section.astro";
 import Greetings from "../components/Greetings.jsx";
 ---
 <BaseLayout pageTitle="Home">
-	<Section className="bg-zinc-100">
-		<h1 class="text-6xl">Astro blog example</h1>
+	<Section>
+		<h2 class="text-6xl" transition:animate="slide" transition:name="maintitle">Astro blog example</h2>
 		<Greetings
 			client:load
 			messages={[

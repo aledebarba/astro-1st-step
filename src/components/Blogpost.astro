@@ -1,28 +1,49 @@
 ---
 const { image, title, date, desc, alt, url, tags } = Astro.props;
-const humanDate = new Date(date)
-const humanReadableDate = humanDate.toLocaleDateString('pt-br', { day: 'numeric', month: 'long', year: 'numeric' })
+const humanDate = new Date(date);
+const humanReadableDate = humanDate.toLocaleDateString("pt-br", {
+    day: "numeric",
+    month: "long",
+    year: "numeric",
+});
 ---
-<div class="mb-8 flex w-full flex-col gap-8 py-16 md:flex-row" data-info="blog post container">
+<div
+    class="mb-8 flex w-full flex-col gap-8 py-16 md:flex-row"
+    data-info="blog post container">
     <div class="order-2 w-full rounded-lg bg-black p-4 md:order-1 md:w-1/4">
-        <a href={url}><picture><img src={image} alt={alt??'blog post image'} class="w-full object-cover"/></picture></a>
+        <a href={url}>
+            <picture>
+                <img
+                    src={image}
+                    alt={alt ?? "blog post image"}
+                    class="w-full object-cover"
+                    transition:name={url}
+                />
+            </picture>
+        </a>
     </div>
     <div class="order-1 flex w-full flex-col gap-2 md:order-2 md:w-2/4">
-        <div class='text-small font-bold uppercase text-stone-500'>
+        <div
+            class="text-small font-bold uppercase text-[var(--theme-primary-color)]">
             {humanReadableDate}
         </div>
-        <a href={url}><div class='text-2xl text-stone-800'>
-            {title}
-        </div></a>
-        <div class='text-stone-800'>
+        <a href={url}>
+            <div class="text-2xl text-[var(--theme-primary-color)]">
+                {title}
+            </div>
+        </a>
+        <div class="text-[var(--theme-primary-color)]">
             {desc}
         </div>
-        <div class='flex flex-wrap gap-2'>
-            {tags && tags.map(( tag =>
-                <div class="rounded-full bg-stone-200 px-2 py-1 text-stone-500">
-                    {tag}
-                </div>
-            ))}
+        <div class="flex flex-wrap gap-2">
+            {
+                tags &&
+                    tags.map((tag) => (
+                        <div class="rounded-full bg-[var(--theme-accent-color)] px-2 py-1 text-[var(--theme-primary-color)]">
+                            {tag}
+                        </div>
+                    ))
+            }
         </div>
     </div>
 </div>

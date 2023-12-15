@@ -1,11 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;700&display=swap');
 
 html {
-    background-color: #f1f5f9;
-    font-family:  Ubuntu, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    --theme-bg-color: #f2f2f2;
+    --theme-primary-color: #282828;
+    --theme-secondary-color: #f8f8f8;
+    --theme-accent-color: #875f40;
+  }
+
+  html.dark {
+    --theme-bg-color: #282828;
+     --theme-primary-color: #f8f8f8;
+     --theme-secondary-color: #b8ced5;
+     --theme-accent-color: slategray;
   }
 
   body {
+    background-color: var(--theme-bg-color);
+    color: var(--theme-primary-color);
+    font-size: 16px;
+    line-height: 1.5;
+    font-family:  Ubuntu, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
     margin: 0 auto;
     width: 100%;
     max-width: 100vw;
